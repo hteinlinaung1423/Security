@@ -1,0 +1,10 @@
+﻿body {
+}
+
+.textarea-constraint {
+    border:none;
+    height: 200px;
+    max-height: 200px;
+    width: 115%;
+    max-width: 1150px;
+}

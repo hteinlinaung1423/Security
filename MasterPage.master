@@ -1,0 +1,175 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
+    <link href="css/cart.css" rel="stylesheet" />
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+            background-color: white;
+        }
+
+        .carousel_height {
+            height: 500px;
+        }
+
+        .carousel_color {
+            background-color: #475762;
+        }
+
+        .right {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <nav class="navbar navbar-inverse navbar-fixed-top carousel_color">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span class="navbar-brand" style="color: #ECEFF4">BookStore</span>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <div class="navbar-form navbar-left">
+                        <asp:Button ID="Button12" runat="server" Text="Home" CausesValidation="false" class="form-control btn-info" OnClick="Button12_Click" />
+                    </div>
+                    <div class="navbar-form navbar-right">
+
+                        <div class="form-group">
+                            <asp:TextBox ID="tbxSearch" runat="server" CssClass="form-control" OnTextChanged="tbxSearch_TextChanged"></asp:TextBox>
+                        </div>
+                        <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" class="form-control" />
+
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <%--<li class="dropdown">
+
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" style="color: #ECEFF4" aria-haspopup="true" aria-expanded="false">Category <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <asp:Button ID="Button7" runat="server" Text="Technical" class="btn-block btn-info" /></li>
+                                <li>
+                                    <asp:Button ID="Button8" runat="server" Text="Non-fiction" class="btn-block btn-info" /></li>
+                                <li>
+                                    <asp:Button ID="Button9" runat="server" Text="Children" class="btn-block btn-info" /></li>
+
+                                <li>
+                                    <asp:Button ID="Button10" runat="server" Text="Finance" class="btn-block btn-info" /></li>
+
+                                <li>
+                                    <asp:Button ID="Button11" runat="server" Text="Adult" class="btn-block btn-info" /></li>
+                            </ul>
+                        </li>--%>
+
+                        <% if (!Page.User.Identity.IsAuthenticated)
+                            { %>
+
+                        <li><a href="login.aspx" style="color: #ECEFF4">
+                            <asp:Label ID="Label1" runat="server" Text="Login" Style="color: #ECEFF4"></asp:Label></a></li>
+                        <li>
+                            <a href="adduser.aspx" style="color: #ECEFF4">
+                                <asp:Label ID="Label2" runat="server" Text="Register"></asp:Label></a>
+                        </li>
+                        <% }
+                            else
+                            { %>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" style="color: #ECEFF4" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <asp:Button ID="Button4" runat="server" CausesValidation="false" Text="Logout" class="btn-block btn-info" OnClick="Button4_Click" /></li>
+                                <% if (!Page.User.IsInRole("Employee"))
+                                    { %>
+                                <li>
+                                    <asp:Button ID="Button3" runat="server" Text="My List" CausesValidation="false" class="btn-block btn-info" OnClick="Button3_Click" /></li>
+
+                                <li>
+                                    <asp:Button ID="Button2" runat="server" CausesValidation="false" Text="Order Detail" class="btn-block btn-info" OnClick="Button2_Click" /></li>
+                                <li>
+                                    <asp:Button ID="Button1" runat="server" CausesValidation="false" Text="My Profile" class="btn-block btn-info" OnClick="Button5_Click" /></li>
+                                <li>
+                                    <asp:Button ID="Button14" runat="server" CausesValidation="false" Text="Top up Credits" class="btn-block btn-info" OnClick="Button14_Click"/></li>
+
+                                <% }
+                                    else
+                                    { %>
+                                <li>
+                                    <asp:Button ID="Button5" runat="server" Text="My Profile" CausesValidation="false" class="btn-block btn-info" OnClick="Button5_Click" /></li>
+                                <li>
+                                    <asp:Button ID="Button6" runat="server" Text="Add New Book" CausesValidation="false" class="btn-block btn-info" OnClick="Button6_Click" /></li>
+                                <li>
+                                    <asp:Button ID="Button13" runat="server" class="btn-block btn-info" CausesValidation="false" Text="Edit Book" onclick="Button13_Click"/></li>
+                                <% } %>
+                            </ul>
+                        </li>
+
+                        <% } %>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+
+        <div class="container-fluid" style="margin-bottom: 2%; padding-left: 0!important; padding-right: 0!important">
+            <div class="row">
+                <div class="col-md-12">
+                    <ol class=" btn-info">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-3">ENDS 31 MAY 2017: 20% OFF + FREE DELIVERY WITH MIN. PURCHASE OF $60</div>
+                            </div>
+                        </div>
+                    </ol>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        <div class="well">
+            <p>
+                &copy; 2017 Book Store Project All rights Reserved.
+            </p>
+        </div>
+    </form>
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <asp:ContentPlaceHolder ID="footer" runat="server">
+    </asp:ContentPlaceHolder>
+
+</body>
+</html>
